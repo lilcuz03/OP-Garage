@@ -1,5 +1,5 @@
 "use client";
-
+import { useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
@@ -46,6 +46,15 @@ const reveal = {
   viewport: { once: true, margin: "-60px" },
   transition: { duration: 0.7, ease },
 } as const;
+
+/* Current year without calling new Date() during prerender */
+const subscribe = () => () => {};
+const getClientYear = () => new Date().getFullYear();
+const getServerYear = () => 2026;
+
+function useCurrentYear() {
+  return useSyncExternalStore(subscribe, getClientYear, getServerYear);
+}
 
 function FooterLink({
   href,
@@ -96,6 +105,8 @@ function ColumnTitle({ children }: { children: React.ReactNode }) {
 }
 
 export default function Footer() {
+  const year = useCurrentYear();
+
   return (
     <footer
       id="contact"
@@ -383,8 +394,7 @@ export default function Footer() {
         >
           <div className="flex flex-col items-center gap-1.5 sm:items-start">
             <p className="text-xs text-muted">
-              &copy; {new Date().getFullYear()} {site.name}. All rights
-              reserved.
+              &copy; {year} {site.name}. All rights reserved.
             </p>
             <p className="text-xs text-muted">
               Developed by{" "}
