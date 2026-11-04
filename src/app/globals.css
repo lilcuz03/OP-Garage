@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+  OP Garage & Gate Repairs – brand tokens
+  Palette taken from the owner's logo (deep green, white, gold).
+  Hex values are by-eye estimates: confirm them with an eyedropper
+  on the original logo file and adjust the few lines marked BRAND.
+*/
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Fonts (loaded in layout.tsx via next/font) */
+  --font-display: var(--font-sora);
+  --font-sans: var(--font-manrope);
+
+  /* Dark green surfaces */
+  --color-background: #06241b; /* page background, near-black green */
+  --color-surface: #0a3326; /* cards, panels, footer */
+  --color-brand: #0b4a37; /* BRAND: logo green */
+  --color-steel: #1c6b52; /* lighter green for gradients and borders */
+
+  /* Text */
+  --color-foreground: #f6f7f4;
+  --color-muted: #a9bdb4;
+  --color-line: rgba(255, 255, 255, 0.1);
+
+  /* Gold accent (use sparingly) */
+  --color-accent: #f5c518; /* BRAND: logo gold, hover and glows */
+  --color-accent-strong: #e8b50a; /* button fills */
+  --color-accent-soft: #ffd84d; /* highlights */
+  --color-on-accent: #0a1f17; /* dark text that sits on gold */
+
+  /* Light sections (alternate with dark for rhythm) */
+  --color-paper: #f4f6f2;
+  --color-ink: #0a2a20; /* text on light sections */
+  --color-ink-muted: #4a6358;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Subtle gold glow used behind hero elements and hover states */
+.glow-gold {
+  box-shadow: 0 0 40px -8px rgba(245, 197, 24, 0.45);
+}
+
+/* Gold gradient for highlighted words in headings */
+.text-gold-gradient {
+  background: linear-gradient(120deg, #ffd84d 0%, #f5c518 50%, #e8b50a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
