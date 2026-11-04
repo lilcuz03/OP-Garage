@@ -9,11 +9,11 @@ export const site = {
 } as const;
 
 export const nav = [
-  { label: "Services", href: "/#services" },
-  { label: "How it works", href: "/#process" },
-  { label: "About", href: "/#about" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const whatsappLink = (

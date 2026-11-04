@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   AnimatePresence,
   motion,
@@ -42,11 +43,15 @@ function Logo() {
 }
 
 export default function Header() {
+  const pathname = usePathname();
   const { scrollY, scrollYProgress } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -89,15 +94,20 @@ export default function Header() {
           <Logo />
 
           <nav
-            className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex"
+            aria-label="Main"
+            className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 lg:flex"
             onMouseLeave={() => setHovered(null)}
           >
             {nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={isActive(item.href) ? "page" : undefined}
                 onMouseEnter={() => setHovered(item.href)}
-                className="relative whitespace-nowrap px-4 py-2 text-sm text-muted transition-colors hover:text-foreground"
+                className={cn(
+                  "relative whitespace-nowrap px-4 py-2 text-sm transition-colors hover:text-foreground",
+                  isActive(item.href) ? "text-foreground" : "text-muted",
+                )}
               >
                 {hovered === item.href && (
                   <motion.span
@@ -134,7 +144,7 @@ export default function Header() {
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
-              className="grid size-10 shrink-0 place-items-center rounded-full border border-line md:hidden"
+              className="grid size-10 shrink-0 place-items-center rounded-full border border-line lg:hidden"
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
             </button>
@@ -150,11 +160,14 @@ export default function Header() {
             exit={{ clipPath: "circle(0% at calc(100% - 2.5rem) 2.5rem)" }}
             transition={{ duration: 0.6, ease }}
             className={cn(
-              "fixed inset-0 z-40 flex flex-col justify-center bg-background md:hidden",
+              "fixed inset-0 z-40 flex flex-col justify-center bg-background lg:hidden",
               gutter,
             )}
           >
-            <nav className="flex flex-col gap-2">
+            <nav
+              aria-label="Mobile"
+              className="flex flex-col gap-2"
+            >
               {nav.map((item, i) => (
                 <motion.div
                   key={item.href}
@@ -165,7 +178,11 @@ export default function Header() {
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="block py-2 font-display text-4xl font-semibold tracking-tight transition-colors hover:text-accent"
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    className={cn(
+                      "block py-2 font-display text-4xl font-semibold tracking-tight transition-colors hover:text-accent",
+                      isActive(item.href) && "text-accent",
+                    )}
                   >
                     {item.label}
                   </Link>

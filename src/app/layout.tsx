@@ -42,8 +42,8 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
-        <WhatsAppWidget />
         <Footer />
+        <WhatsAppWidget />
       </body>
     </html>
   );
