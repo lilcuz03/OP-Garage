@@ -12,6 +12,21 @@ const nextConfig: NextConfig = {
       },
     },
   },
+
+  async redirects() {
+    return [
+      {
+        source: "/garage-and-gate-installations",
+        destination: "/services/garage-doors",
+        permanent: true,
+      },
+      {
+        source: "/electric-fence-installations",
+        destination: "/services/electric-fences",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Camera } from "lucide-react";
-import type { ImageSlotData } from "@/data/Images";
+import type { ImageSlot } from "@/data/Images";
 import { cn } from "@/lib/utils";
 
 /*
@@ -15,7 +15,7 @@ export default function ImageSlot({
   variant = "full",
   className,
 }: {
-  image: ImageSlotData;
+  image: ImageSlot;
   sizes: string;
   priority?: boolean;
   variant?: "full" | "bare";

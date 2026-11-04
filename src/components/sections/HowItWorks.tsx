@@ -11,16 +11,13 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
+import { images } from "@/data/Images";
 import { site, whatsappLink } from "@/lib/site";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 /* Shared side padding: keep identical in Header.tsx and Footer.tsx */
 const gutter = "px-4 sm:px-6 lg:px-10 xl:px-14 2xl:px-20";
-
-/* Drop your photo in /public/images and set the path here, e.g. "/images/process.jpg".
-   While it is null, a branded placeholder shows instead. */
-const PROCESS_IMAGE: string | null = null;
 
 const steps: { title: string; text: string; icon: LucideIcon }[] = [
   {
@@ -55,6 +52,7 @@ const reveal = {
 export default function HowItWorks() {
   const listRef = useRef<HTMLOListElement>(null);
   const reduceMotion = useReducedMotion();
+  const photo = images.process;
 
   const { scrollYProgress } = useScroll({
     target: listRef,
@@ -70,7 +68,7 @@ export default function HowItWorks() {
     <section
       id="process"
       aria-labelledby="process-heading"
-      className="relative scroll-mt-24 overflow-hidden py-20 sm:py-28"
+      className="relative scroll-mt-24 overflow-hidden py-16 sm:py-24"
     >
       <div
         aria-hidden
@@ -129,23 +127,30 @@ export default function HowItWorks() {
                 </a>
               </div>
 
-              {/* Image / placeholder */}
+              {/* Photo / placeholder (from images.process) */}
               <div className="relative mt-10 hidden aspect-[4/3] overflow-hidden rounded-3xl border border-line bg-surface sm:block">
-                {PROCESS_IMAGE ? (
+                {photo.src ? (
                   <Image
-                    src={PROCESS_IMAGE}
-                    alt="OP Garage & Gate technician at work"
+                    src={photo.src}
+                    alt={photo.alt}
                     fill
                     sizes="(min-width: 1024px) 40vw, 90vw"
                     className="object-cover"
                   />
                 ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-steel/40 via-surface to-accent/20 text-muted">
+                  <div
+                    className={`absolute inset-0 flex flex-col items-center justify-center gap-3 text-muted ${
+                      photo.placeholder ??
+                      "bg-gradient-to-br from-steel/40 via-surface to-accent/20"
+                    }`}
+                  >
                     <Wrench
                       className="size-10 text-accent"
                       aria-hidden
                     />
-                    <span className="text-sm">Photo coming soon</span>
+                    <span className="text-sm">
+                      {photo.label ?? "Photo coming soon"}
+                    </span>
                   </div>
                 )}
                 <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">

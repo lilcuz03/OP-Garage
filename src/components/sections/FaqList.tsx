@@ -7,9 +7,16 @@ import type { Faq } from "@/data/Faqs";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-export default function FaqList({ items }: { items: Faq[] }) {
+export default function FaqList({
+  items,
+  defaultOpen = 0,
+}: {
+  items: Faq[];
+  /** Index of the question open on load, or null for all closed */
+  defaultOpen?: number | null;
+}) {
   const baseId = useId();
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(defaultOpen);
 
   return (
     <ul className="flex flex-col gap-3">

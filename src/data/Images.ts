@@ -1,62 +1,57 @@
-/*
-  EVERY PHOTO SLOT ON THE SITE LIVES HERE.
-
-  HOW TO ADD A PHOTO
-  1. Save the photo in  public/images/pages/   (use a descriptive file name)
-  2. Uncomment the `src` line for that slot and set the real file name
-  3. Write an honest `alt` describing what is in the photo
-
-  Until `src` is set, a colored placeholder is shown.
-  Service card photos are separate: see src/data/services.ts
-*/
-
-export type ImageSlotData = {
-  /** Path inside /public, e.g. "/images/pages/team-at-work.jpg" */
+export type ImageSlot = {
+  /* Add this when you have the photo, e.g. "/images/hero-services.jpg" */
   src?: string;
-  /** Describe what is in the photo (SEO and accessibility) */
   alt: string;
-  /** Temporary gradient shown until a real photo is added */
-  placeholder: string;
-  /** Short note shown on the placeholder so you know what photo belongs here */
-  label: string;
-  /** Which part of the photo stays visible when cropped, e.g. "center 30%" */
   position?: string;
+  /* Tailwind classes or a CSS colour/gradient shown while there is no photo */
+  placeholder?: string;
+  label?: string;
 };
 
-export const images = {
-  /* Page banners: wide landscape photos, 2000px or more, with calm areas for text */
+type ImageKey =
+  | "heroServices"
+  | "heroAbout"
+  | "heroFaq"
+  | "heroContact"
+  | "aboutTeam"
+  | "aboutVan"
+  | "process";
+
+/* Photos go in /public/images. Until a slot has a `src`, its placeholder shows. */
+export const images: Record<ImageKey, ImageSlot> = {
   heroServices: {
-    // src: "/images/pages/hero-services.jpg",
-    alt: "OP Garage & Gate Repairs technician installing a gate motor",
-    placeholder: "linear-gradient(135deg, #5a4300 0%, #a67c00 100%)",
-    label: "Banner: technician installing or repairing a gate or door",
+    alt: "OP Garage & Gate technician installing a garage door",
+    placeholder: "bg-gradient-to-br from-steel/50 via-surface to-accent/20",
+    label: "Services hero photo",
   },
   heroAbout: {
-    // src: "/images/pages/hero-about.jpg",
-    alt: "The OP Garage & Gate Repairs team",
-    placeholder: "linear-gradient(135deg, #0b4a37 0%, #2a8a69 100%)",
-    label: "Banner: the owner and team",
+    alt: "The OP Garage & Gate team at work",
+    placeholder: "bg-gradient-to-tr from-accent/20 via-surface to-steel/50",
+    label: "About hero photo",
+  },
+  heroFaq: {
+    alt: "OP Garage & Gate technician answering a customer's question",
+    placeholder: "bg-gradient-to-bl from-steel/50 via-surface to-accent/20",
+    label: "FAQ hero photo",
   },
   heroContact: {
-    // src: "/images/pages/hero-contact.jpg",
-    alt: "OP Garage & Gate Repairs vehicle ready for a call-out",
-    placeholder: "linear-gradient(135deg, #0a3a4a 0%, #2aa3c4 100%)",
-    label: "Banner: branded vehicle or technician with tools",
+    alt: "Contact OP Garage & Gate Repairs in Durban",
+    placeholder: "bg-gradient-to-br from-accent/20 via-surface to-steel/50",
+    label: "Contact hero photo",
   },
-
-  /* About page photos: landscape, about 1600px wide */
   aboutTeam: {
-    // src: "/images/pages/about-team.jpg",
-    alt: "The OP Garage & Gate Repairs team on a job",
-    placeholder: "linear-gradient(135deg, #2c2a4a 0%, #7a6fd6 100%)",
-    label: "Photo: the team at work",
+    alt: "The OP Garage & Gate repair team",
+    placeholder: "bg-gradient-to-br from-steel/40 via-surface to-accent/20",
+    label: "Team photo",
   },
   aboutVan: {
-    // src: "/images/pages/about-vehicle.jpg",
-    alt: "OP Garage & Gate Repairs branded vehicle",
-    placeholder: "linear-gradient(135deg, #4a1d12 0%, #e07a3a 100%)",
-    label: "Photo: branded vehicle",
+    alt: "OP Garage & Gate service vehicle",
+    placeholder: "bg-gradient-to-br from-steel/40 via-surface to-accent/20",
+    label: "Service vehicle photo",
   },
-} satisfies Record<string, ImageSlotData>;
-
-export type ImageKey = keyof typeof images;
+  process: {
+    alt: "OP Garage & Gate technician inspecting a gate motor",
+    placeholder: "bg-gradient-to-br from-steel/40 via-surface to-accent/20",
+    label: "Process photo",
+  },
+};

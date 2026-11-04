@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
-import Services from "@/components/sections/Services";
+import SectionBand from "@/components/ui/Sectionband";
+import CtaBand from "@/components/sections/Ctaband";
+import ServiceDetails from "@/components/sections/ServiceDetails";
 import HowItWorks from "@/components/sections/HowItWorks";
 import { images } from "@/data/Images";
 
@@ -21,8 +23,16 @@ export default function ServicesPage() {
         description="Installations and repairs for garage doors, gate motors, electric fences, burglar guards, clearview fencing and carports."
         image={images.heroServices}
       />
-      <Services />
-      <HowItWorks />
+
+      <SectionBand tone="deep">
+        <ServiceDetails />
+      </SectionBand>
+
+      <SectionBand tone="base">
+        <HowItWorks />
+      </SectionBand>
+
+      <CtaBand />
     </main>
   );
 }

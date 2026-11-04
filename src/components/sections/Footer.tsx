@@ -13,6 +13,8 @@ import {
   Navigation,
   Phone,
 } from "lucide-react";
+import SectionBand from "@/components/ui/Sectionband";
+import { serviceDetails } from "@/data/serviceDetails";
 import { nav, site, whatsappLink } from "@/lib/site";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -25,15 +27,6 @@ const MAP_COORDS = { lat: -29.9118637, lng: 30.8598374 };
 const MAP_EMBED = `https://maps.google.com/maps?q=${MAP_COORDS.lat},${MAP_COORDS.lng}&z=15&output=embed`;
 const MAPS_LINK = "https://maps.app.goo.gl/CLWjHakPe8jSWuB57";
 const DIRECTIONS_LINK = `https://www.google.com/maps/dir/?api=1&destination=${MAP_COORDS.lat},${MAP_COORDS.lng}`;
-
-const services = [
-  "Garage doors",
-  "Gate motors",
-  "Electric fences",
-  "Burglar guards",
-  "Clearview fencing",
-  "Carports",
-];
 
 const legal = [
   { label: "Legal Notice", href: "/legal-notice" },
@@ -110,7 +103,7 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="relative mt-24 scroll-mt-24 overflow-hidden border-t border-line bg-background"
+      className="relative scroll-mt-24 overflow-hidden"
     >
       {/* ───────── Map ───────── */}
       <motion.div
@@ -175,73 +168,6 @@ export default function Footer() {
         </div>
       </motion.div>
 
-      {/* ───────── CTA band ───────── */}
-      <div className={`w-full pt-4 sm:pt-6 ${gutter}`}>
-        <motion.div
-          {...reveal}
-          className="relative overflow-hidden rounded-3xl border border-line bg-surface p-6 sm:p-10 lg:p-14 xl:p-16"
-        >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-accent/20 blur-3xl sm:size-96"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -bottom-32 -left-20 size-72 rounded-full bg-steel/40 blur-3xl"
-          />
-
-          <div className="relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
-            <div className="max-w-3xl">
-              <p className="inline-flex items-center gap-2 rounded-full border border-line bg-white/5 px-3 py-1 text-xs font-medium text-muted">
-                <span className="relative flex size-2">
-                  <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-75" />
-                  <span className="relative inline-flex size-2 rounded-full bg-accent" />
-                </span>
-                Support available 24/7
-              </p>
-              <h2 className="mt-5 font-display text-3xl font-semibold leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl">
-                Gate or garage door giving you trouble?{" "}
-                <span className="text-gold-gradient">Let&apos;s sort it.</span>
-              </h2>
-              <p className="mt-4 max-w-xl text-base text-muted sm:text-lg">
-                Flexible appointments, affordable prices and fast repairs.
-                Message us on WhatsApp or give us a call.
-              </p>
-            </div>
-
-            {/* Buttons: never wrap, stack on phones, sit side by side from sm up */}
-            <div className="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row">
-              <a
-                href={whatsappLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-accent-strong px-7 py-4 text-base font-semibold text-on-accent transition-all duration-300 hover:scale-[1.03] hover:bg-accent hover:shadow-[0_0_36px_-4px_rgba(245,197,24,0.6)] active:scale-95"
-              >
-                <MessageCircle
-                  className="size-5"
-                  aria-hidden
-                />
-                WhatsApp us
-                <ArrowUpRight
-                  className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  aria-hidden
-                />
-              </a>
-              <a
-                href={site.phoneHref}
-                className="inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full border border-white/20 bg-white/5 px-7 py-4 text-base font-semibold backdrop-blur transition-all duration-300 hover:border-accent hover:bg-white/10 hover:text-accent active:scale-95"
-              >
-                <Phone
-                  className="size-5"
-                  aria-hidden
-                />
-                Call now
-              </a>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
       {/* ───────── Link columns ───────── */}
       <div className={`w-full pt-14 sm:pt-20 ${gutter}`}>
         <motion.div
@@ -295,9 +221,11 @@ export default function Footer() {
           >
             <ColumnTitle>Services</ColumnTitle>
             <ul className="flex flex-col gap-3">
-              {services.map((s) => (
-                <li key={s}>
-                  <FooterLink href="/#services">{s}</FooterLink>
+              {serviceDetails.map((s) => (
+                <li key={s.slug}>
+                  <FooterLink href={`/services/${s.slug}`}>
+                    {s.title}
+                  </FooterLink>
                 </li>
               ))}
             </ul>
