@@ -13,6 +13,7 @@ type ImageKey =
   | "heroAbout"
   | "heroFaq"
   | "heroContact"
+  | "heroBlog"
   | "aboutTeam"
   | "aboutVan"
   | "process";
@@ -53,5 +54,10 @@ export const images: Record<ImageKey, ImageSlot> = {
     alt: "OP Garage & Gate technician inspecting a gate motor",
     placeholder: "bg-gradient-to-br from-steel/40 via-surface to-accent/20",
     label: "Process photo",
+  },
+  heroBlog: {
+    alt: "OP Garage & Gate Repairs tips and advice",
+    placeholder: "bg-gradient-to-tr from-steel/50 via-surface to-accent/20",
+    label: "Blog hero photo",
   },
 };
