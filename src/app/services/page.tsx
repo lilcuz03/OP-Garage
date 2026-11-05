@@ -1,18 +1,18 @@
-import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import SectionBand from "@/components/ui/Sectionband";
 import CtaBand from "@/components/sections/Ctaband";
 import ServiceDetails from "@/components/sections/ServiceDetails";
 import HowItWorks from "@/components/sections/HowItWorks";
-import { images } from "@/data/Images";
 import Expectations from "@/components/sections/Expectations";
+import { images } from "@/data/Images";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Garage door, gate motor & electric fence services",
   description:
     "Garage door, gate motor, electric fence, burglar guard, clearview fencing and carport installations and repairs. Flexible appointments and fast repairs.",
-  alternates: { canonical: "/services" },
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
@@ -33,7 +33,7 @@ export default function ServicesPage() {
         <HowItWorks />
       </SectionBand>
 
-      <SectionBand tone="base">
+      <SectionBand tone="deep">
         <Expectations />
       </SectionBand>
 

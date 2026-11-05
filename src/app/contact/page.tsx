@@ -1,30 +1,26 @@
-import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
-import SectionBand from "@/components/ui/Sectionband";
 import ContactSection from "@/components/sections/ContactSection";
 import { images } from "@/data/Images";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact us",
   description:
-    "Get a quote for garage door, gate motor or electric fence repairs and installations in Durban. Message us on WhatsApp or call. Flexible appointments and 24/7 support.",
-  alternates: { canonical: "/contact" },
-};
+    "Contact OP Garage & Gate Repairs by WhatsApp, phone or email. Flexible appointments and support available 24/7.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
     <main>
       <PageHero
         crumb="Contact"
-        title="Contact"
-        highlight="us"
-        description="Get a quote or book an appointment. Message us on WhatsApp or give us a call, and we'll take it from there."
+        title="Get in"
+        highlight="touch"
+        description="Message us on WhatsApp, give us a call or send an email. Support is available 24/7."
         image={images.heroContact}
       />
-
-      <SectionBand tone="deep">
-        <ContactSection />
-      </SectionBand>
+      <ContactSection />
     </main>
   );
 }

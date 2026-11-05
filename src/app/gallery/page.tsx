@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
 import { MessageCircle, Phone } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import GalleryGrid from "@/components/sections/Gallerygrid";
 import { images } from "@/data/Images";
 import { site, whatsappLink } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Our work: gallery of installations and repairs",
   description:
     "See recent garage door, gate motor, electric fence, burglar guard, clearview fencing and carport installations and repairs by OP Garage & Gate Repairs.",
-  alternates: { canonical: "/gallery" },
-};
+  path: "/gallery",
+});
 
 export default function GalleryPage() {
   return (

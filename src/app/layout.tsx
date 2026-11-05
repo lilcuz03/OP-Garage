@@ -1,7 +1,7 @@
-import type { Metadata, Viewport } from "next";
+import { siteMetadata, siteViewport } from "@/lib/seo";
+import LocalBusinessJsonLd from "@/components/seo/LocalBusinessJsonLd";
 import { Sora, Manrope } from "next/font/google";
 import "./globals.css";
-import { site } from "@/lib/site";
 import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
 import WhatsAppWidget from "@/components/whatsapp/Whatsappwidget";
@@ -17,17 +17,8 @@ const manrope = Manrope({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: `${site.name} | Garage Doors, Gate Motors & Electric Fences`,
-    template: `%s | ${site.name}`,
-  },
-  description:
-    "Fast, affordable garage door, gate motor and electric fence repairs and installations. Flexible appointments and expert service.",
-};
-
-export const viewport: Viewport = { themeColor: "#0a0a0b" };
+export const metadata = siteMetadata;
+export const viewport = siteViewport;
 
 export default function RootLayout({
   children,
@@ -40,6 +31,7 @@ export default function RootLayout({
       className={`${sora.variable} ${manrope.variable}`}
     >
       <body>
+        <LocalBusinessJsonLd />
         <Header />
         {children}
         <Footer />
