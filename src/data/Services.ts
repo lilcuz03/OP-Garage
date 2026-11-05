@@ -14,6 +14,10 @@ export type Service = {
   description: string;
   tags: string[];
   icon: LucideIcon;
+  /** Short points shown on the services page, based on the owner's own wording */
+  highlights: string[];
+  /** Typical faults, shown on the services page. OWNER TO REVIEW AND EDIT. */
+  commonProblems?: string[];
   /** Path inside /public, e.g. "/images/services/garage-doors.jpg". Leave out to show the colored placeholder. */
   image?: string;
   /** Describe what is in the photo (helps SEO and accessibility). */
@@ -26,12 +30,15 @@ export type Service = {
   HOW TO ADD A PHOTO
   1. Save the photo in  public/images/services/
   2. Uncomment the `image` line for that service and set the real file name
-  3. Write a short, honest `imageAlt` describing the photo
+  3. Write an honest `imageAlt` describing the photo
 
-  Descriptions are taken from the owner's old website.
+  Descriptions and highlights come from the owner's old website.
   Tags: installation and repairs are stated on the old site for garage doors,
   gates, electric fences and carports. Burglar guards and clearview fencing are
   tagged as installation only. Confirm with the owner and edit if needed.
+
+  `commonProblems` are typical faults written as general examples. The owner
+  should review them and remove anything he does not handle.
 */
 export const services: Service[] = [
   {
@@ -41,6 +48,17 @@ export const services: Service[] = [
       "Enhance your home's safety with prompt garage door installation and repairs.",
     tags: ["Installation", "Repairs"],
     icon: Warehouse,
+    highlights: [
+      "New garage door installation",
+      "Garage door repairs",
+      "Emergency repairs, just a call away",
+    ],
+    commonProblems: [
+      "Door won't open or close",
+      "Door stuck or off its track",
+      "Remote or opener not responding",
+      "Noisy or jerky movement",
+    ],
     // image: "/images/services/garage-doors.jpg",
     // imageAlt: "Garage door installed by OP Garage & Gate Repairs",
     placeholder:
@@ -53,6 +71,17 @@ export const services: Service[] = [
       "Our skilled technicians ensure secure and efficient operation of various gate motors.",
     tags: ["Installation", "Repairs"],
     icon: DoorOpen,
+    highlights: [
+      "Installation of various gate motors",
+      "Gate motor repairs and servicing",
+      "Secure, efficient day-to-day operation",
+    ],
+    commonProblems: [
+      "Gate won't open or close",
+      "Remote not working",
+      "Motor clicking, humming or stalling",
+      "Gate stopping halfway",
+    ],
     // image: "/images/services/gate-motors.jpg",
     // imageAlt: "Gate motor installed by OP Garage & Gate Repairs",
     placeholder:
@@ -64,6 +93,16 @@ export const services: Service[] = [
     description: "We provide professional installation of electric fences.",
     tags: ["Installation", "Maintenance"],
     icon: Zap,
+    highlights: [
+      "Professional electric fence installation",
+      "Electric fence maintenance",
+      "Extra security for your property",
+    ],
+    commonProblems: [
+      "Fence not energising",
+      "Alarm or energiser fault",
+      "Damaged or broken wires",
+    ],
     // image: "/images/services/electric-fences.jpg",
     // imageAlt: "Electric fence installed by OP Garage & Gate Repairs",
     placeholder:
@@ -75,6 +114,11 @@ export const services: Service[] = [
     description: "Boost your home's security with reliable burglar guards.",
     tags: ["Installation"],
     icon: ShieldCheck,
+    highlights: [
+      "Reliable burglar guards",
+      "Boosts your home's security",
+      "Installed by skilled technicians",
+    ],
     // image: "/images/services/burglar-guards.jpg",
     // imageAlt: "Burglar guards fitted by OP Garage & Gate Repairs",
     placeholder:
@@ -87,6 +131,11 @@ export const services: Service[] = [
       "Our expert technicians create a secure and clear fence for an unobstructed view.",
     tags: ["Installation"],
     icon: Grid3x3,
+    highlights: [
+      "Secure, clear fencing",
+      "An unobstructed view",
+      "Installed by expert technicians",
+    ],
     // image: "/images/services/clearview-fencing.jpg",
     // imageAlt: "Clearview fencing installed by OP Garage & Gate Repairs",
     placeholder:
@@ -99,6 +148,11 @@ export const services: Service[] = [
       "Discover a variety of carport styles, from freestanding to attached, that complement your home.",
     tags: ["Installation", "Repairs"],
     icon: Car,
+    highlights: [
+      "Freestanding and attached styles",
+      "Carport installation and repairs",
+      "Designed to complement your home",
+    ],
     // image: "/images/services/carports.jpg",
     // imageAlt: "Carport built by OP Garage & Gate Repairs",
     placeholder:

@@ -8,12 +8,17 @@ export type ImageSlot = {
   label?: string;
 };
 
+/* Same type under a second name, so files that also have a component called
+   ImageSlot can import it without a name clash. */
+export type ImageSlotData = ImageSlot;
+
 type ImageKey =
   | "heroServices"
   | "heroAbout"
   | "heroFaq"
   | "heroContact"
   | "heroBlog"
+  | "heroGallery"
   | "aboutTeam"
   | "aboutVan"
   | "process";
@@ -39,6 +44,11 @@ export const images: Record<ImageKey, ImageSlot> = {
     alt: "Contact OP Garage & Gate Repairs in Durban",
     placeholder: "bg-gradient-to-br from-accent/20 via-surface to-steel/50",
     label: "Contact hero photo",
+  },
+  heroGallery: {
+    alt: "A finished installation by OP Garage & Gate Repairs",
+    placeholder: "bg-gradient-to-tl from-steel/50 via-surface to-accent/20",
+    label: "Gallery hero photo",
   },
   aboutTeam: {
     alt: "The OP Garage & Gate repair team",

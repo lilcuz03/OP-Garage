@@ -1,26 +1,41 @@
 import Image from "next/image";
 import { Camera } from "lucide-react";
-import type { ImageSlot } from "@/data/Images";
+import type { ImageSlot as ImageSlotType } from "@/data/Images";
 import { cn } from "@/lib/utils";
 
 /*
   Shows the real photo when `image.src` is set, otherwise a colored placeholder.
   The parent decides the size, e.g. className="aspect-[4/3] rounded-3xl".
   variant="bare" hides the placeholder icon and label (used behind page banners).
+  fit="contain" shows the whole photo without cropping (used in the gallery lightbox).
+
+  `image.placeholder` can be Tailwind classes ("bg-gradient-to-br from-steel/50 ...")
+  or a CSS value ("linear-gradient(...)", "#0b4a37"). Both work.
 */
+
+const isCssValue = (v: string) =>
+  /^(#|rgb|hsl|linear-gradient|radial-gradient|conic-gradient|var\()/.test(
+    v.trim(),
+  );
+
 export default function ImageSlot({
   image,
   sizes,
   priority = false,
   variant = "full",
+  fit = "cover",
   className,
 }: {
-  image: ImageSlot;
+  image: ImageSlotType;
   sizes: string;
   priority?: boolean;
   variant?: "full" | "bare";
+  fit?: "cover" | "contain";
   className?: string;
 }) {
+  const placeholder = image.placeholder ?? "bg-surface";
+  const css = isCssValue(placeholder);
+
   return (
     <div className={cn("relative overflow-hidden", className)}>
       {image.src ? (
@@ -30,7 +45,7 @@ export default function ImageSlot({
           fill
           sizes={sizes}
           priority={priority}
-          className="object-cover"
+          className={fit === "contain" ? "object-contain" : "object-cover"}
           style={
             image.position ? { objectPosition: image.position } : undefined
           }
@@ -39,8 +54,11 @@ export default function ImageSlot({
         <div
           role="img"
           aria-label={image.alt}
-          className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center text-white/80"
-          style={{ background: image.placeholder }}
+          className={cn(
+            "absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center text-white/80",
+            !css && placeholder,
+          )}
+          style={css ? { background: placeholder } : undefined}
         >
           <div
             aria-hidden
@@ -58,7 +76,7 @@ export default function ImageSlot({
                 aria-hidden
               />
               <span className="relative max-w-xs text-[11px] font-medium uppercase tracking-[0.18em] opacity-75">
-                {image.label}
+                {image.label ?? "Photo coming soon"}
               </span>
             </>
           )}

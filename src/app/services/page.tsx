@@ -5,6 +5,7 @@ import CtaBand from "@/components/sections/Ctaband";
 import ServiceDetails from "@/components/sections/ServiceDetails";
 import HowItWorks from "@/components/sections/HowItWorks";
 import { images } from "@/data/Images";
+import Expectations from "@/components/sections/Expectations";
 
 export const metadata: Metadata = {
   title: "Garage door, gate motor & electric fence services",
@@ -30,6 +31,10 @@ export default function ServicesPage() {
 
       <SectionBand tone="base">
         <HowItWorks />
+      </SectionBand>
+
+      <SectionBand tone="base">
+        <Expectations />
       </SectionBand>
 
       <CtaBand />
