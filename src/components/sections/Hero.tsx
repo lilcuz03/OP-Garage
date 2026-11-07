@@ -384,7 +384,7 @@ export default function Hero() {
         initial={{ scale: reduced ? 1 : 1.12 }}
         animate={{ scale: 1 }}
         transition={{ duration: 2.4, ease }}
-        className="absolute inset-0 -z-30 opacity-[0.18]"
+        className="absolute inset-0 -z-30 opacity-[0.5]"
       >
         <ImageSlot
           image={images.heroHome}
@@ -401,7 +401,7 @@ export default function Hero() {
         className="absolute inset-0 -z-20"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(6,36,27,0.88) 0%, rgba(6,36,27,0.94) 60%, rgba(6,36,27,1) 100%)",
+            "linear-gradient(to bottom, rgba(6,36,27,0.6) 0%, rgba(6,36,27,0.78) 60%, rgba(6,36,27,1) 100%)",
         }}
       />
 
