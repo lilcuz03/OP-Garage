@@ -18,9 +18,9 @@ export default function FaqGroups() {
       />
 
       <div className={`relative w-full ${gutter}`}>
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
           {/* ───────── Topic menu (sticky on desktop) ───────── */}
-          <aside className="lg:col-span-4">
+          <aside className="min-w-0 lg:col-span-4">
             <div className="lg:sticky lg:top-28">
               <nav
                 aria-label="FAQ topics"
@@ -79,7 +79,7 @@ export default function FaqGroups() {
           </aside>
 
           {/* ───────── Question groups ───────── */}
-          <div className="flex flex-col gap-14 sm:gap-16 lg:col-span-8">
+          <div className="flex min-w-0 flex-col gap-14 sm:gap-16 lg:col-span-8">
             {faqCategories.map((c, i) => (
               <div
                 key={c.id}

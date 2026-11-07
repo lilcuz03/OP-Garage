@@ -86,7 +86,7 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="min-w-0">
       <label
         htmlFor={htmlFor}
         className="mb-2 flex items-baseline justify-between text-sm font-medium"
@@ -135,11 +135,11 @@ export default function ContactSection() {
       />
 
       <div className={`relative w-full ${gutter}`}>
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
           {/* ───────── Contact details ───────── */}
           <motion.div
             {...reveal}
-            className="lg:col-span-5"
+            className="min-w-0 lg:col-span-5"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
               Get in touch
@@ -170,7 +170,7 @@ export default function ContactSection() {
                       <span className="block text-xs uppercase tracking-[0.14em] text-muted">
                         {label}
                       </span>
-                      <span className="mt-0.5 block break-words text-base font-medium">
+                      <span className="mt-0.5 block text-base font-medium [overflow-wrap:anywhere]">
                         {value}
                       </span>
                     </span>
@@ -181,7 +181,10 @@ export default function ContactSection() {
                   "flex items-center gap-4 rounded-2xl border border-line bg-surface p-4";
 
                 return (
-                  <li key={label}>
+                  <li
+                    key={label}
+                    className="min-w-0"
+                  >
                     {href ? (
                       <a
                         href={href}
@@ -205,11 +208,11 @@ export default function ContactSection() {
           <motion.div
             {...reveal}
             transition={{ duration: 0.7, ease, delay: 0.08 }}
-            className="lg:col-span-7"
+            className="min-w-0 lg:col-span-7"
           >
             <form
               onSubmit={onSubmit}
-              className="rounded-3xl border border-line bg-surface p-5 sm:p-8"
+              className="min-w-0 rounded-3xl border border-line bg-surface p-5 sm:p-8"
             >
               <h3 className="font-display text-2xl font-semibold tracking-tight">
                 Request a quote
@@ -219,7 +222,7 @@ export default function ContactSection() {
                 ready to send.
               </p>
 
-              <div className="mt-6 grid gap-5 sm:grid-cols-2">
+              <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <Field
                   label="Your name"
                   htmlFor="name"
@@ -270,7 +273,7 @@ export default function ContactSection() {
                   </div>
                 </Field>
 
-                <div className="sm:col-span-2">
+                <div className="min-w-0 sm:col-span-2">
                   <Field
                     label="Suburb or area"
                     htmlFor="suburb"
@@ -287,7 +290,7 @@ export default function ContactSection() {
                   </Field>
                 </div>
 
-                <div className="sm:col-span-2">
+                <div className="min-w-0 sm:col-span-2">
                   <Field
                     label="What's the problem?"
                     htmlFor="details"
