@@ -295,27 +295,27 @@ function GarageVisual({ reduced }: { reduced: boolean }) {
           <div className="absolute inset-x-0 bottom-0 h-[12%] bg-black/30" />
         </div>
 
-        {/* Floating chips */}
+        {/* Floating chips: tucked inside the card on phones, hanging over the edge from sm up */}
         <Chip
           icon={Zap}
           label="Fast repairs"
           delay={0}
           reduced={reduced}
-          className="-left-2 top-[16%] sm:-left-8"
+          className="left-2 top-[16%] sm:-left-8"
         />
         <Chip
           icon={Clock}
           label="24/7 support"
           delay={0.8}
           reduced={reduced}
-          className="-right-2 top-[46%] sm:-right-8"
+          className="right-2 top-[46%] sm:-right-8"
         />
         <Chip
           icon={CalendarCheck}
           label="Flexible appointments"
           delay={1.6}
           reduced={reduced}
-          className="-bottom-3 left-4 sm:-bottom-4 sm:left-8"
+          className="bottom-5 left-5 sm:-bottom-4 sm:left-8"
         />
       </motion.div>
     </motion.div>
@@ -441,9 +441,14 @@ export default function Hero() {
           gutter,
         )}
       >
-        <div className="grid w-full items-center gap-14 lg:grid-cols-12 lg:gap-8">
-          {/* Text */}
-          <div className="text-center lg:col-span-7 lg:text-left">
+        {/*
+          Phones and tablets: 1) heading + paragraph, 2) animation, 3) buttons + checks.
+          Desktop (lg): text on the left, animation on the right, vertically centred.
+          The two outer rows are 1fr spacers that centre the text block.
+        */}
+        <div className="grid w-full grid-cols-1 gap-y-10 lg:grid-cols-12 lg:grid-rows-[1fr_auto_auto_1fr] lg:gap-x-8 lg:gap-y-0">
+          {/* 1. Badge, heading, paragraph */}
+          <div className="min-w-0 text-center lg:col-span-7 lg:col-start-1 lg:row-start-2 lg:text-left">
             <motion.p
               {...fadeUp(0)}
               className="inline-flex items-center gap-2 rounded-full border border-line bg-white/5 px-4 py-1.5 text-xs font-medium text-muted backdrop-blur"
@@ -498,10 +503,18 @@ export default function Hero() {
               installations. Flexible appointments and expert service. Secure
               your home today.
             </motion.p>
+          </div>
 
+          {/* 2. Animation: in the middle on phones, right-hand column on desktop */}
+          <div className="min-w-0 lg:col-span-5 lg:col-start-8 lg:row-span-4 lg:row-start-1 lg:self-center">
+            <GarageVisual reduced={reduced} />
+          </div>
+
+          {/* 3. Buttons and checkmarks */}
+          <div className="min-w-0 text-center lg:col-span-7 lg:col-start-1 lg:row-start-3 lg:text-left">
             <motion.div
               {...fadeUp(0.9)}
-              className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start"
+              className="flex flex-col gap-3 sm:flex-row sm:justify-center lg:mt-8 lg:justify-start"
             >
               <a
                 href={whatsappLink()}
@@ -529,7 +542,7 @@ export default function Hero() {
 
             <motion.ul
               {...fadeUp(1.05)}
-              className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 lg:justify-start"
+              className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 lg:justify-start"
             >
               {features.map((f) => (
                 <li
@@ -546,11 +559,6 @@ export default function Hero() {
                 </li>
               ))}
             </motion.ul>
-          </div>
-
-          {/* Visual */}
-          <div className="lg:col-span-5">
-            <GarageVisual reduced={reduced} />
           </div>
         </div>
       </motion.div>
