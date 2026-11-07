@@ -1,6 +1,6 @@
 "use client";
-import { useEffect } from "react";
-import { motion } from "motion/react";
+import { useEffect, useRef } from "react";
+import { motion, useInView } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -14,9 +14,17 @@ const ELFSIGHT_APP_ID = "f59ff70d-f217-4e5d-a12e-3b4948abc597";
 const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/CLWjHakPe8jSWuB57";
 
 export default function Reviews() {
-  /* Load Elfsight's script on mount. Adding it each time this section mounts
-     also makes the widget come back when you navigate away and return. */
+  const widgetRef = useRef<HTMLDivElement>(null);
+
+  /* True once the widget area is within 400px of the screen */
+  const nearViewport = useInView(widgetRef, {
+    once: true,
+    margin: "400px 0px",
+  });
+
+  /* Load Elfsight's script only when it is needed */
   useEffect(() => {
+    if (!nearViewport) return;
     const script = document.createElement("script");
     script.src = "https://elfsightcdn.com/platform.js";
     script.async = true;
@@ -24,7 +32,7 @@ export default function Reviews() {
     return () => {
       script.remove();
     };
-  }, []);
+  }, [nearViewport]);
 
   return (
     <section
@@ -58,7 +66,10 @@ export default function Reviews() {
 
         {/* Elfsight Google Reviews widget. The min-height stops the page
             jumping while the widget loads. */}
-        <div className="mt-10 min-h-[320px]">
+        <div
+          ref={widgetRef}
+          className="mt-10 min-h-[320px]"
+        >
           <div
             className={`elfsight-app-${ELFSIGHT_APP_ID}`}
             data-elfsight-app-lazy
