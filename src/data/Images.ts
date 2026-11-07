@@ -19,6 +19,10 @@ type ImageKey =
   | "heroContact"
   | "heroBlog"
   | "heroGallery"
+  | "heroHome"
+  | "heroGate1"
+  | "heroGate2"
+  | "heroGate3"
   | "aboutTeam"
   | "aboutVan"
   | "process";
@@ -49,6 +53,29 @@ export const images: Record<ImageKey, ImageSlot> = {
     alt: "A finished installation by OP Garage & Gate Repairs",
     placeholder: "bg-gradient-to-tl from-steel/50 via-surface to-accent/20",
     label: "Gallery hero photo",
+  },
+  heroHome: {
+    src: "/images/hero-home.png",
+    alt: "OP Garage & Gate Repairs technician at work",
+    placeholder: "bg-gradient-to-br from-steel/50 via-surface to-accent/20",
+    label: "Home hero background photo",
+  },
+  /* The three photos that appear inside the animated garage door on the home page.
+     Each time the door opens, the next photo is shown. Add more slots the same way. */
+  heroGate1: {
+    alt: "A gate installed by OP Garage & Gate Repairs",
+    placeholder: "linear-gradient(135deg, #0b4a37 0%, #2a8a69 100%)",
+    label: "Gate photo 1",
+  },
+  heroGate2: {
+    alt: "A garage door installed by OP Garage & Gate Repairs",
+    placeholder: "linear-gradient(135deg, #0a3a4a 0%, #2aa3c4 100%)",
+    label: "Gate photo 2",
+  },
+  heroGate3: {
+    alt: "A gate motor installed by OP Garage & Gate Repairs",
+    placeholder: "linear-gradient(135deg, #4a1d12 0%, #e07a3a 100%)",
+    label: "Gate photo 3",
   },
   aboutTeam: {
     alt: "The OP Garage & Gate repair team",

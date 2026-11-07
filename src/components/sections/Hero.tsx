@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import type { PointerEvent } from "react";
 import {
   motion,
+  useAnimate,
   useMotionTemplate,
   useMotionValue,
   useReducedMotion,
@@ -20,6 +21,9 @@ import {
   Zap,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import ImageSlot from "@/components/ui/ImagesSlot";
+import { images } from "@/data/Images";
+import type { ImageSlot as ImageSlotType } from "@/data/Images";
 import { site, whatsappLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -41,6 +45,19 @@ const tickerItems = [
   "Carports",
   "Installations & repairs",
 ];
+
+/*
+  Photos shown inside the garage door, one per opening.
+  Add or remove slots in src/data/Images.ts (heroGate1, heroGate2, ...) and list them here.
+*/
+const gateSlides: ImageSlotType[] = [
+  images.heroGate1,
+  images.heroGate2,
+  images.heroGate3,
+];
+
+const sleep = (ms: number) =>
+  new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 24 },
@@ -111,15 +128,62 @@ function GarageVisual({ reduced }: { reduced: boolean }) {
     py.set(0);
   };
 
-  /* One open/close cycle: closed → open → hold → closed */
-  const cycle = {
-    duration: 9,
-    times: [0, 0.3, 0.7, 1],
-    ease: "easeInOut" as const,
-    repeat: Infinity,
-    repeatDelay: 0.8,
-    delay: 1.2,
-  };
+  /*
+    The door loop: open, hold, close, then swap to the next photo while the
+    door is fully closed (so the swap is never seen), pause, repeat.
+    Photos are switched directly on the elements, so no React state is
+    set inside the effect.
+  */
+  const [scope, animate] = useAnimate();
+
+  useEffect(() => {
+    if (reduced) return;
+
+    let cancelled = false;
+    let current = 0;
+    const root = scope.current as HTMLElement | null;
+    const slideEls = root
+      ? Array.from(root.querySelectorAll<HTMLElement>("[data-slide]"))
+      : [];
+
+    const move = (open: boolean) => {
+      const opts = { duration: 2.7, ease: "easeInOut" as const };
+      return Promise.all([
+        animate("[data-door]", { y: open ? "-92%" : "0%" }, opts),
+        animate("[data-glow]", { opacity: open ? 1 : 0.1 }, opts),
+        animate("[data-spill]", { opacity: open ? 0.9 : 0.1 }, opts),
+      ]);
+    };
+
+    (async () => {
+      try {
+        await sleep(1200);
+        while (!cancelled) {
+          await move(true);
+          if (cancelled) break;
+          await sleep(2600);
+          if (cancelled) break;
+          await move(false);
+          if (cancelled) break;
+
+          /* Door is shut: switch to the next photo unseen */
+          if (slideEls.length > 1) {
+            const next = (current + 1) % slideEls.length;
+            slideEls[current].style.opacity = "0";
+            slideEls[next].style.opacity = "1";
+            current = next;
+          }
+          await sleep(900);
+        }
+      } catch {
+        /* animation was stopped because the component unmounted */
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [animate, reduced, scope]);
 
   return (
     <motion.div
@@ -136,7 +200,10 @@ function GarageVisual({ reduced }: { reduced: boolean }) {
         className="relative aspect-[5/4] w-full rounded-[2rem] border border-line bg-surface p-3 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] sm:p-4"
       >
         {/* Wall */}
-        <div className="relative size-full overflow-hidden rounded-[1.4rem] bg-background">
+        <div
+          ref={scope}
+          className="relative size-full overflow-hidden rounded-[1.4rem] bg-background"
+        >
           <div
             aria-hidden
             className="absolute inset-0 opacity-50"
@@ -147,38 +214,58 @@ function GarageVisual({ reduced }: { reduced: boolean }) {
           />
 
           {/* Gold light spilling onto the driveway */}
-          <motion.div
+          <div
+            data-spill
             aria-hidden
             className="absolute inset-x-[18%] bottom-[2%] h-[18%] rounded-full bg-accent/40 blur-2xl"
-            animate={
-              reduced ? { opacity: 0.5 } : { opacity: [0.1, 0.9, 0.9, 0.1] }
-            }
-            transition={cycle}
+            style={{ opacity: reduced ? 0.5 : 0.1 }}
           />
 
           {/* Door frame */}
           <div className="absolute inset-x-[10%] bottom-[12%] top-[20%] overflow-hidden rounded-t-xl border-2 border-line bg-[#030f0a]">
-            {/* Light inside the garage */}
-            <motion.div
+            {/* Photos shown behind the door, one at a time */}
+            {gateSlides.map((slide, i) => (
+              <div
+                key={i}
+                data-slide
+                className="absolute inset-0"
+                style={{ opacity: i === 0 ? 1 : 0 }}
+              >
+                <ImageSlot
+                  image={slide}
+                  sizes="(min-width: 1024px) 40vw, 90vw"
+                  className="absolute inset-0"
+                />
+              </div>
+            ))}
+
+            {/* Darkening so the gold light and the door stay readable */}
+            <div
               aria-hidden
               className="absolute inset-0"
               style={{
                 background:
-                  "radial-gradient(70% 80% at 50% 100%, rgba(245,197,24,0.55), rgba(245,197,24,0.08) 60%, transparent)",
+                  "linear-gradient(to bottom, rgba(3,15,10,0.55), rgba(3,15,10,0.15) 60%, rgba(3,15,10,0.35))",
               }}
-              animate={
-                reduced ? { opacity: 0.6 } : { opacity: [0.1, 1, 1, 0.1] }
-              }
-              transition={cycle}
+            />
+
+            {/* Light inside the garage */}
+            <div
+              data-glow
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                opacity: reduced ? 0.6 : 0.1,
+                background:
+                  "radial-gradient(70% 80% at 50% 100%, rgba(245,197,24,0.4), rgba(245,197,24,0.05) 60%, transparent)",
+              }}
             />
 
             {/* The door itself: six panels rolling up */}
-            <motion.div
+            <div
+              data-door
               className="absolute inset-0 flex flex-col"
-              animate={
-                reduced ? { y: "-55%" } : { y: ["0%", "-92%", "-92%", "0%"] }
-              }
-              transition={cycle}
+              style={reduced ? { transform: "translateY(-55%)" } : undefined}
             >
               {Array.from({ length: 6 }).map((_, i) => (
                 <div
@@ -201,7 +288,7 @@ function GarageVisual({ reduced }: { reduced: boolean }) {
                   )}
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
           {/* Ground */}
@@ -291,6 +378,33 @@ export default function Hero() {
       onPointerMove={onMove}
       className="relative isolate flex min-h-[100svh] flex-col overflow-hidden"
     >
+      {/* Background photo: very faint, slowly settling in */}
+      <motion.div
+        aria-hidden
+        initial={{ scale: reduced ? 1 : 1.12 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 2.4, ease }}
+        className="absolute inset-0 -z-30 opacity-[0.18]"
+      >
+        <ImageSlot
+          image={images.heroHome}
+          sizes="100vw"
+          priority
+          variant="bare"
+          className="absolute inset-0"
+        />
+      </motion.div>
+
+      {/* Heavy green overlay on top of the photo */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-20"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(6,36,27,0.88) 0%, rgba(6,36,27,0.94) 60%, rgba(6,36,27,1) 100%)",
+        }}
+      />
+
       {/* Background layers */}
       <div
         aria-hidden
