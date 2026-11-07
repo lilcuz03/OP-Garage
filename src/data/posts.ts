@@ -32,6 +32,7 @@ export const posts: Post[] = [
     category: "Gate motors",
     date: "2026-11-04",
     image: {
+      src: "/images/blog-gate-motor-check.jpg",
       alt: "A sliding gate with its motor and track",
       placeholder: "bg-gradient-to-br from-steel/40 via-surface to-accent/20",
       label: "Gate motor photo",
@@ -101,6 +102,7 @@ export const posts: Post[] = [
     category: "Garage doors",
     date: "2026-11-04",
     image: {
+      src: "/images/blog-garage-door.jpg",
       alt: "A garage door partly open",
       placeholder: "bg-gradient-to-tr from-accent/20 via-surface to-steel/40",
       label: "Garage door photo",
@@ -169,6 +171,7 @@ export const posts: Post[] = [
     category: "Security tips",
     date: "2026-11-04",
     image: {
+      src: "/images/blog-security-layers.jpg",
       alt: "A secured property boundary",
       placeholder: "bg-gradient-to-bl from-steel/40 via-surface to-accent/20",
       label: "Security photo",

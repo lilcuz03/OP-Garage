@@ -24,6 +24,7 @@ export const serviceDetails: ServiceDetail[] = [
       "The remote or wall button has stopped responding",
     ],
     image: {
+      src: "/images/service-garage-doors.jpeg",
       alt: "Garage door installed by OP Garage & Gate Repairs",
       placeholder: "bg-gradient-to-br from-steel/40 via-surface to-accent/20",
       label: "Garage door photo",
@@ -42,6 +43,8 @@ export const serviceDetails: ServiceDetail[] = [
       "The gate stops or reverses partway",
     ],
     image: {
+      src: "/images/service-gate-motors.jpeg",
+
       alt: "Gate motor installation by OP Garage & Gate Repairs",
       placeholder: "bg-gradient-to-tr from-accent/20 via-surface to-steel/40",
       label: "Gate motor photo",
@@ -54,6 +57,8 @@ export const serviceDetails: ServiceDetail[] = [
       "An electric fence is a strong deterrent around your property. We provide professional installation of electric fences, along with maintenance to keep them working as they should.",
     offers: ["Installation", "Maintenance"],
     image: {
+      src: "/images/service-electric-fences1.jpg",
+
       alt: "Electric fence installed by OP Garage & Gate Repairs",
       placeholder: "bg-gradient-to-bl from-steel/40 via-surface to-accent/20",
       label: "Electric fence photo",
@@ -66,6 +71,8 @@ export const serviceDetails: ServiceDetail[] = [
       "Burglar guards add a visible layer of protection to your home. We install reliable burglar guards that boost your home's security.",
     offers: ["Installation"],
     image: {
+      src: "/images/service-burglar-guards.jpg",
+
       alt: "Burglar guards installed by OP Garage & Gate Repairs",
       placeholder: "bg-gradient-to-br from-accent/20 via-surface to-steel/40",
       label: "Burglar guards photo",
@@ -78,6 +85,8 @@ export const serviceDetails: ServiceDetail[] = [
       "Clearview fencing keeps your boundary secure without blocking your view. Our expert technicians install secure, clear fencing so you keep an unobstructed view of your surroundings.",
     offers: ["Installation"],
     image: {
+      src: "/images/service-clearview-fencing.jpg",
+
       alt: "Clearview fencing installed by OP Garage & Gate Repairs",
       placeholder: "bg-gradient-to-tr from-steel/40 via-surface to-accent/20",
       label: "Clearview fencing photo",
@@ -90,6 +99,8 @@ export const serviceDetails: ServiceDetail[] = [
       "A carport shields your vehicle from harsh sun and the elements. We install a variety of carport styles, from freestanding to attached, to complement your home, and we handle carport repairs too.",
     offers: ["Installation", "Repairs"],
     image: {
+      src: "/images/service-carports.jpg",
+
       alt: "Carport installed by OP Garage & Gate Repairs",
       placeholder: "bg-gradient-to-bl from-accent/20 via-surface to-steel/40",
       label: "Carport photo",

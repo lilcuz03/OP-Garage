@@ -105,8 +105,11 @@ const sections: LegalSectionData[] = [
             line with its own privacy policy.
           </li>
           <li>
-            <strong>Google reviews:</strong> customer reviews may be loaded from
-            Google and displayed on our pages.
+            <strong>Google reviews (Elfsight):</strong> customer reviews from
+            our Google profile are shown using a widget from Elfsight. When it
+            loads, Elfsight and Google may process technical data such as your
+            IP address and may set cookies, in line with their own privacy
+            policies.
           </li>
           <li>
             <strong>Hosting:</strong> the website is hosted by Vercel, which
@@ -114,8 +117,9 @@ const sections: LegalSectionData[] = [
           </li>
         </ul>
         <p>
-          This website does not set its own tracking or advertising cookies. If
-          that changes, we will update this policy.
+          Apart from the third-party services above, this website does not set
+          its own tracking or advertising cookies. If that changes, we will
+          update this policy.
         </p>
       </>
     ),

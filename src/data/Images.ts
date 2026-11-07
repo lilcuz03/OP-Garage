@@ -30,21 +30,25 @@ type ImageKey =
 /* Photos go in /public/images. Until a slot has a `src`, its placeholder shows. */
 export const images: Record<ImageKey, ImageSlot> = {
   heroServices: {
+    src: "/images/hero-services.jpg",
     alt: "OP Garage & Gate technician installing a garage door",
     placeholder: "bg-gradient-to-br from-steel/50 via-surface to-accent/20",
     label: "Services hero photo",
   },
   heroAbout: {
-    alt: "The OP Garage & Gate team at work",
+    src: "/images/hero-about.jpg",
+    alt: "The OP Garage & Gate team installing a gate motor on site",
     placeholder: "bg-gradient-to-tr from-accent/20 via-surface to-steel/50",
     label: "About hero photo",
   },
   heroFaq: {
+    src: "/images/hero-faq.jpg",
     alt: "OP Garage & Gate technician answering a customer's question",
     placeholder: "bg-gradient-to-bl from-steel/50 via-surface to-accent/20",
     label: "FAQ hero photo",
   },
   heroContact: {
+    src: "/images/hero-contact.jpg",
     alt: "Contact OP Garage & Gate Repairs in Durban",
     placeholder: "bg-gradient-to-br from-accent/20 via-surface to-steel/50",
     label: "Contact hero photo",
@@ -82,21 +86,25 @@ export const images: Record<ImageKey, ImageSlot> = {
     label: "Gate photo 3",
   },
   aboutTeam: {
+    src: "/images/green.jpg",
     alt: "The OP Garage & Gate repair team",
     placeholder: "bg-gradient-to-br from-steel/40 via-surface to-accent/20",
     label: "Team photo",
   },
   aboutVan: {
+    src: "/images/green.jpg",
     alt: "OP Garage & Gate service vehicle",
     placeholder: "bg-gradient-to-br from-steel/40 via-surface to-accent/20",
     label: "Service vehicle photo",
   },
   process: {
-    alt: "OP Garage & Gate technician inspecting a gate motor",
+    src: "/images/process-technician.jpg",
+    alt: "An OP Garage & Gate technician inspecting a gate motor on site",
     placeholder: "bg-gradient-to-br from-steel/40 via-surface to-accent/20",
     label: "Process photo",
   },
   heroBlog: {
+    src: "/images/hero-blog.jpg",
     alt: "OP Garage & Gate Repairs tips and advice",
     placeholder: "bg-gradient-to-tr from-steel/50 via-surface to-accent/20",
     label: "Blog hero photo",

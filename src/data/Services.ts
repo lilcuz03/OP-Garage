@@ -44,6 +44,8 @@ export const services: Service[] = [
   {
     id: "garage-doors",
     title: "Garage doors",
+    image: "/images/home-garage-doors.jpg",
+    imageAlt: "A garage door installed by OP Garage & Gate Repairs",
     description:
       "Enhance your home's safety with prompt garage door installation and repairs.",
     tags: ["Installation", "Repairs"],
@@ -67,6 +69,9 @@ export const services: Service[] = [
   {
     id: "gate-motors",
     title: "Gate motors",
+    image: "/images/home-gate-motors.jpg",
+    imageAlt:
+      "A gate motor fitted to a sliding gate by OP Garage & Gate Repairs",
     description:
       "Our skilled technicians ensure secure and efficient operation of various gate motors.",
     tags: ["Installation", "Repairs"],
@@ -90,6 +95,8 @@ export const services: Service[] = [
   {
     id: "electric-fences",
     title: "Electric fences",
+    image: "/images/home-electric-fences.jpg",
+    imageAlt: "An electric fence installed along a boundary wall",
     description: "We provide professional installation of electric fences.",
     tags: ["Installation", "Maintenance"],
     icon: Zap,
@@ -111,6 +118,8 @@ export const services: Service[] = [
   {
     id: "burglar-guards",
     title: "Burglar guards",
+    image: "/images/home-burglar-guards.jpg",
+    imageAlt: "Burglar guards fitted to a window by OP Garage & Gate Repairs",
     description: "Boost your home's security with reliable burglar guards.",
     tags: ["Installation"],
     icon: ShieldCheck,
@@ -127,6 +136,8 @@ export const services: Service[] = [
   {
     id: "clearview-fencing",
     title: "Clearview fencing",
+    image: "/images/home-clearview-fencing.jpg",
+    imageAlt: "A clearview fence installed by OP Garage & Gate Repairs",
     description:
       "Our expert technicians create a secure and clear fence for an unobstructed view.",
     tags: ["Installation"],
@@ -144,6 +155,9 @@ export const services: Service[] = [
   {
     id: "carports",
     title: "Carports",
+    image: "/images/home-carports.jpg",
+    imageAlt:
+      "A carport with a car parked underneath, installed by OP Garage & Gate Repairs",
     description:
       "Discover a variety of carport styles, from freestanding to attached, that complement your home.",
     tags: ["Installation", "Repairs"],
